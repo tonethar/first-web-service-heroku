@@ -1,5 +1,3 @@
-
-
 // 4 - here's our index page
 const indexPage = `
 <html>
@@ -28,19 +26,17 @@ const errorPage = `
   </body>
 </html>`;
 
-
-const getIndexResponse = (request,response) => {
+const getIndexResponse = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/html' });
   response.write(indexPage);
   response.end();
 };
 
-const get404Response = (request,response) => {
+const get404Response = (request, response) => {
   response.writeHead(404, { 'Content-Type': 'text/html' });
   response.write(errorPage);
   response.end();
-}
-
+};
 
 module.exports.getIndexResponse = getIndexResponse;
 module.exports.get404Response = get404Response;

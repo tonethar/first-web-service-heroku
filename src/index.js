@@ -1,12 +1,11 @@
-const jsonHandler = require('./jsonResponses.js');
-const htmlHandler = require('./htmlResponses.js');
-
 // 1 - pull in the HTTP server module
 const http = require('http');
 
 // 2 - pull in URL module (for URL parsing)
 const url = require('url');
 const query = require('querystring');
+const htmlHandler = require('./htmlResponses.js');
+const jsonHandler = require('./jsonResponses.js');
 
 // 3 - locally this will be 3000, on Heroku it will be assigned
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
@@ -17,7 +16,6 @@ const urlStruct = {
   notFound: htmlHandler.get404Response,
 };
 
-
 const onRequest = (request, response) => {
   // console.log(request.headers);
   const parsedUrl = url.parse(request.url);
@@ -26,16 +24,15 @@ const onRequest = (request, response) => {
   // console.log('pathname=', pathname);
 
   const params = query.parse(parsedUrl.query);
-  const { max } = params;
+  //const { max } = params;
   // console.log('params=', params);
   // console.log('max=', max);
-  
-  if(urlStruct[pathname]){
-    urlStruct[pathname](request,response,params);
-  }else{
-    urlStruct["notFound"](request,response,params);
-  }
 
+  if (urlStruct[pathname]) {
+    urlStruct[pathname](request, response, params);
+  } else {
+    urlStruct.notFound(request, response, params);
+  }
 };
 
 // 8 - create the server, hook up the request handling function, and start listening on `port`

@@ -1,5 +1,3 @@
-
-
 // 6 - this will return a random number no bigger than `max`, as a string
 // we will also doing our query parameter validation here
 const getRandomNumberJSON = (max = 1) => {
@@ -14,10 +12,10 @@ const getRandomNumberJSON = (max = 1) => {
   return JSON.stringify(responseObj);
 };
 
-const getRandomNumberResponse = (request,response,params) => {
-    response.writeHead(200, { 'Content-Type': 'application/json' }); // send response headers
-    response.write(getRandomNumberJSON(params.max)); // send content
-    response.end(); // close connection
+const getRandomNumberResponse = (request, response, params) => {
+  response.writeHead(200, { 'Content-Type': 'application/json' }); // send response headers
+  response.write(getRandomNumberJSON(params.max)); // send content
+  response.end(); // close connection
 };
 
 module.exports.getRandomNumberResponse = getRandomNumberResponse;
